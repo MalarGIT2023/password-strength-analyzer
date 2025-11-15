@@ -60,7 +60,7 @@ Strong passwords are your first line of defense against:
 
 ## Quick Start
 
-### 🚀 Option 1: Using Demo Script (Recommended)
+### Option 1: Using Demo Script (Recommended)
 
 The easiest way to run the application with automatic server management:
 
