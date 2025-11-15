@@ -1,0 +1,422 @@
+/*
+  Password Strength Analyzer — Stylesheet
+  
+  Responsive, modern UI with glassmorphism design.
+  Color-coded cards dynamically update based on password strength.
+  
+  Created for IEEE Mission Tomorrow Career Exploration Event
+  Copyright (c) 2025 MalarGIT2023
+  
+  Features:
+  - Glassmorphism design (frosted glass effect)
+  - Responsive layout (desktop, tablet, mobile)
+  - Dynamic color theming based on password strength
+  - Smooth transitions and gradients
+  - Accessible typography and spacing
+*/
+
+/* ============================================================================
+   CSS Variables & Root Styles
+   ============================================================================ */
+
+:root {
+  /* Default background color (used as fallback) */
+  --bg: #f0f2f8;
+}
+
+/* ============================================================================
+   Global Performance Optimizations
+   ============================================================================ */
+
+* {
+  /* Optimize paint operations */
+  box-sizing: border-box;
+}
+
+html {
+  /* Prevent reflow issues */
+  overflow-y: scroll;
+}
+
+input, button, select, textarea {
+  /* Prevent input from causing layout shift */
+  font: inherit;
+}
+
+/* ============================================================================
+   Body & Background
+   ============================================================================ */
+
+body {
+  /* Remove default margins */
+  margin: 0;
+  
+  /* Modern, accessible font stack */
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  
+  /* Background image: IEEE-themed pattern */
+  background: url('images/ieee-connector-bg.jpg') no-repeat fixed center center / cover;
+  
+  /* Flexbox layout: center content vertically and horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top to prevent jumping */
+  
+  /* Add padding around content */
+  padding: 40px 20px;
+  
+  /* Position relative for pseudo-element overlay */
+  position: relative;
+  
+  /* Prevent scrollbar from causing layout shift */
+  overflow-y: scroll;
+  
+  /* Hardware acceleration for smooth scrolling */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark overlay for better text readability over background image */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Uncomment to adjust darkness: background: rgba(0,0,0,0.4); */
+  z-index: -1; /* Place behind all content */
+}
+
+/* ============================================================================
+   Main Container
+   ============================================================================ */
+
+/* Main application container with glassmorphism effect */
+.container {
+  /* Responsive width: max 1200px, but take full available width */
+  max-width: 1200px;
+  width: 100%;
+  
+  /* Flexbox column layout: stack elements vertically */
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Space between elements */
+  align-items: center;
+  
+  /* Glassmorphism: semi-transparent white background */
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  
+  /* Blur effect for glassmorphism */
+  backdrop-filter: blur(12px);
+  
+  /* Prevent layout shift during animations */
+  contain: layout style paint;
+}
+
+/* ============================================================================
+   Heading & Typography
+   ============================================================================ */
+
+/* Main heading */
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* ============================================================================
+   Password Display Card
+   ============================================================================ */
+
+/* Card showing the typed password in real-time */
+.password-display-card {
+  width: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  font-size: 22px;
+  font-weight: 700; /* Bold text */
+  text-align: center;
+  color: white;
+  
+  /* Gradient background: blue to light blue */
+  background: linear-gradient(90deg, #0072b2, #56b4e9);
+  
+  /* Smooth color transition when password strength changes */
+  transition: background 0.5s ease, color 0.5s ease;
+  
+  /* Prevent layout shift */
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================================
+   Action Buttons
+   ============================================================================ */
+
+/* Container for action buttons */
+.action-buttons {
+  display: flex;
+  gap: 20px; /* Space between buttons */
+  margin-bottom: 20px;
+}
+
+/* Button styling: Enter Password / Reload */
+.action-buttons button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  
+  /* Smooth transitions for hover effects */
+  transition: all 0.3s ease;
+  
+  background: #0072b2; /* Blue background */
+  color: white;
+}
+
+/* Button hover effect: darker shade */
+.action-buttons button:hover {
+  background: #005a8c;
+}
+
+/* ============================================================================
+   Input Card
+   ============================================================================ */
+
+/* Container for password input field and strength bar */
+.input-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+/* Password input field */
+input[type="password"] {
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width calculation */
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  background: rgba(255, 255, 255, 0.8);
+  
+  /* Hardware acceleration and smooth transitions */
+  will-change: border-color, box-shadow;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  /* Smooth transition for focus state */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Input focus state: green border and glow */
+input[type="password"]:focus {
+  border-color: #4caf50;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+/* ============================================================================
+   Strength Bar
+   ============================================================================ */
+
+/* Container for strength visualization bar */
+.strength-bar {
+  width: 100%;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  overflow: hidden; /* Clip the fill bar inside */
+  margin-top: 12px;
+}
+
+/* Fill bar: expands as strength increases */
+.strength-fill {
+  position: relative;
+  height: 100%;
+  width: 0%; /* Starts empty, increases with password strength */
+  border-radius: 16px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.5s ease;
+  
+  /* Hardware acceleration for smooth animation */
+  will-change: width, background;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Emoji indicator: moves along the strength bar */
+.strength-fill .emoji {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  
+  /* Hardware acceleration */
+  will-change: left;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Percentage text: always centered in strength bar */
+.strength-fill #strengthPercent {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  /* Hardware acceleration for smooth text updates */
+  will-change: contents;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ============================================================================
+   Cards Container & Grid Layout
+   ============================================================================ */
+
+/* Flexbox grid container for analysis cards */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap; /* Cards wrap to next row */
+  gap: 20px; /* Space between cards */
+  width: 100%;
+  justify-content: space-between;
+  
+  /* Prevent layout shift during updates */
+  contain: layout;
+}
+
+/* Individual card styling */
+.cards-container .card {
+  /* Flex: 1 fr minimum 250px, but can grow */
+  flex: 1 1 250px;
+  min-width: 250px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  
+  /* Smooth transitions for color changes */
+  transition: background 0.5s ease, color 0.5s ease, transform 0.3s ease;
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  backdrop-filter: blur(6px);
+  
+  /* GPU acceleration for smooth rendering */
+  transform: translateZ(0);
+  will-change: background, color;
+}
+
+/* Suggestions card: full width on separate row */
+.cards-container .suggestion-card {
+  flex: 0 0 100%; /* Take full width, don't shrink or grow */
+  max-width: 100%;
+}
+
+/* Card headings */
+.cards-container .card h3 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+}
+
+/* ============================================================================
+   Info Lines (Key-Value Pairs)
+   ============================================================================ */
+
+/* Container for each info line (e.g., "Length: 12") */
+.info-line {
+  display: flex;
+  justify-content: space-between; /* Key on left, value on right */
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+/* ============================================================================
+   Suggestions List
+   ============================================================================ */
+
+/* Unordered list of security suggestions */
+.suggestions {
+  margin-top: 12px;
+  padding-left: 0; /* Remove default left padding */
+  list-style-type: disc; /* Show bullet points */
+  font-size: 16px;
+  line-height: 1.8;
+  
+  /* Two-column layout for suggestions */
+  column-count: 2;
+  column-gap: 20px; /* Space between columns */
+}
+
+/* ============================================================================
+   Card Type Defaults (Initial Colors)
+   ============================================================================ */
+
+/* These colors are defaults; they get overridden by JavaScript based on strength */
+
+/* Strength Info Card: Orange default */
+.category-card {
+  background: #d55e00;
+  color: white;
+}
+
+/* Basic Info Card: Blue default */
+.basic-card {
+  background: #0072b2;
+  color: white;
+}
+
+/* Crack Times Card: Green default */
+.crack-card {
+  background: #009e73;
+  color: white;
+}
+
+/* Suggestions Card: Yellow default */
+.suggestion-card {
+  background: #f0e442;
+  color: #222;
+}
+
+/* ============================================================================
+   Responsive Design
+   ============================================================================ */
+
+/* Tablets: 1024px and below */
+@media(max-width:1024px) {
+  .cards-container .card {
+    /* Cards take 45% width (2 per row) */
+    flex: 1 1 45%;
+  }
+}
+
+/* Mobile: 720px and below */
+@media(max-width:720px) {
+  .cards-container .card {
+    /* Cards take 100% width (1 per row) */
+    flex: 1 1 100%;
+  }
+}

@@ -1,0 +1,120 @@
+<!--
+  Password Strength Analyzer — Live
+  
+  A real-time web application that analyzes password strength using entropy calculations,
+  character set analysis, and password crack time estimation.
+  
+  Created for IEEE Mission Tomorrow Career Exploration Event
+  Copyright (c) 2025 MalarGIT2023
+  
+  Features:
+  - Real-time strength visualization with color-coded feedback
+  - Entropy-based strength calculation
+  - Estimated crack times at multiple attack speeds
+  - Character class analysis and suggestions
+  - Responsive design with glassmorphism UI
+  - Privacy-first: passwords processed locally only
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding for international characters -->
+  <meta charset="UTF-8">
+  <!-- Viewport settings for mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title shown in browser tab -->
+  <title>Password Strength Analyzer — Live</title>
+  <!-- Disable default favicon to prevent 404 -->
+  <link rel="icon" href="data:,">
+  <!-- Link to stylesheet for styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Main container for the application -->
+<div class="container">
+  <!-- Action button section: toggle between input mode and reload -->
+  <div class="action-buttons">
+    <!-- Button to enable password input or reload the page -->
+    <button id="btnToggle">Enter Password</button>
+  </div>
+
+  <!-- Password display card: shows the password being typed in real-time -->
+  <div class="password-display-card" id="passwordCard">
+    <span id="typedPw">Your password will appear here</span>
+  </div>
+
+  <!-- Input section with password field and strength bar visualization -->
+  <div class="card input-card">
+    <!-- Password input field (disabled until user clicks button) -->
+    <input type="password" id="pw" placeholder="Type your password here..." disabled maxlength="75">
+    
+    <!-- Strength bar: visual representation of password strength -->
+    <div class="strength-bar">
+      <!-- Strength fill bar with emoji and percentage -->
+      <div id="strengthFill" class="strength-fill">
+        <!-- Emoji indicator: moves along the strength bar (⚪🟠🟡🟢💪) -->
+        <span id="strengthEmoji" class="emoji">⚪</span>
+        <!-- Percentage display: 0-100% based on entropy -->
+        <span id="strengthPercent">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards container: holds all analysis cards -->
+  <div class="cards-container">
+    
+    <!-- Strength Info Card: displays entropy, category, and length -->
+    <div class="card category-card" id="cardCategory">
+      <h3>Strength Info</h3>
+      <!-- Category: Very Weak, Weak, Reasonable, Strong, Very Strong -->
+      <div class="info-line"><span>Category:</span> <span id="cat">—</span></div>
+      <!-- Entropy: bits of randomness (higher = stronger) -->
+      <div class="info-line"><span>Entropy:</span> <span id="ent">—</span></div>
+      <!-- Length: number of characters in password -->
+      <div class="info-line"><span>Length:</span> <span id="len">—</span></div>
+    </div>
+
+    <!-- Basic Info Card: character classes and charset size -->
+    <div class="card basic-card" id="cardBasic">
+      <h3>Basic Info</h3>
+      <!-- Character Classes: lowercase, uppercase, digits, symbols -->
+      <div class="info-line"><span>Character Classes:</span> <span id="classes">—</span></div>
+      <!-- Charset Size: total number of possible characters used -->
+      <div class="info-line"><span>Charset Size:</span> <span id="charset">—</span></div>
+      <!-- Estimated Guesses: average number of guesses needed to crack -->
+      <div class="info-line"><span>Estimated Guesses:</span> <span id="guesses">—</span></div>
+    </div>
+
+    <!-- Crack Times Card: estimated time to crack at different attack speeds -->
+    <div class="card crack-card" id="cardCrack">
+      <h3>Estimated Crack Times</h3>
+      <!-- Slow online (1e3/s): 1000 guesses per second (typical web login) -->
+      <div class="info-line"><span>Slow online (1e3/s):</span> <span id="ct1">—</span></div>
+      <!-- Typical online (1e4/s): 10,000 guesses per second (faster web service) -->
+      <div class="info-line"><span>Typical online (1e4/s):</span> <span id="ct2">—</span></div>
+      <!-- Single GPU (1e8/s): 100,000,000 guesses per second (single graphics processor) -->
+      <div class="info-line"><span>Single GPU (1e8/s):</span> <span id="ct3">—</span></div>
+      <!-- Cluster/offline (1e10/s): 10 billion guesses per second (offline attack) -->
+      <div class="info-line"><span>Cluster/offline (1e10/s):</span> <span id="ct4">—</span></div>
+      <!-- Very large cluster (1e12/s): 1 trillion guesses per second (extreme attack) -->
+      <div class="info-line"><span>Very large cluster (1e12/s):</span> <span id="ct5">—</span></div>
+    </div>
+
+    <!-- Suggestions Card: actionable recommendations to strengthen password -->
+    <div class="card suggestion-card" id="cardSuggest">
+      <h3>Suggestions</h3>
+      <!-- Unordered list of suggestions based on password analysis -->
+      <ul class="suggestions" id="suggestions">
+        <li>Type a password to get suggestions...</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Link to JavaScript logic -->
+<script src="script.js"></script>
+</body>
+</html>
+
