@@ -63,13 +63,13 @@ body {
   align-items: flex-start; /* Align to top to prevent jumping */
   
   /* Add padding around content */
-  padding: 40px 20px;
+  padding: 40px 40px;
   
   /* Position relative for pseudo-element overlay */
   position: relative;
   
   /* Prevent scrollbar from causing layout shift */
-  overflow-y: scroll;
+  overflow-y: auto;
   
   /* Hardware acceleration for smooth scrolling */
   -webkit-font-smoothing: antialiased;
