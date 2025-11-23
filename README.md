@@ -1,3 +1,9 @@
+```markdown
+[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow)]
+[![Security](https://img.shields.io/badge/Privacy-First-blue)]
+[![License](https://img.shields.io/badge/License-MIT-green)]
+[![Stars](https://img.shields.io/github/stars/MalarGIT2023/password-strength-analyzer?style=social)]
+```
 # Password Strength Analyzer
 
 **Mission Tomorrow Career Exploration Event hosted by Chamber RVA**  
