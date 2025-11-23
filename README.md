@@ -1,9 +1,13 @@
-```markdown
-[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow)]
-[![Security](https://img.shields.io/badge/Privacy-First-blue)]
-[![License](https://img.shields.io/badge/License-MIT-green)]
-[![Stars](https://img.shields.io/github/stars/MalarGIT2023/password-strength-analyzer?style=social)]
-```
+![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow)
+![Color Feedback](https://img.shields.io/badge/Dynamic-Color%20Feedback-orange)
+![Entropy](https://img.shields.io/badge/Entropy-Based-Strength-blue)
+![Crack Time](https://img.shields.io/badge/Crack%20Time-Estimation-red)
+![Character Analysis](https://img.shields.io/badge/Character%20Class-Analysis-purple)
+![Security Suggestions](https://img.shields.io/badge/Actionable-Security%20Tips-green)
+![Privacy First](https://img.shields.io/badge/Privacy-Local%20Processing-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Stars](https://img.shields.io/github/stars/MalarGIT2023/password-strength-analyzer?style=social)
+
 # Password Strength Analyzer
 
 **Mission Tomorrow Career Exploration Event hosted by Chamber RVA**  
